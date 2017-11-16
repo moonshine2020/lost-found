@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+
+    <context:component-scan base-package="com.nineteen.lostfound.*">
+    </context:component-scan>
+    <mvc:annotation-driven>
+       <!-- <mvc:message-converters>
+            &lt;!&ndash; @ResponseBody乱码问题，将StringHttpMessageConverter的默认编码设为UTF-8 &ndash;&gt;
+            <beans:bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <beans:constructor-arg value="UTF-8"/>
+            </beans:bean>
+        </mvc:message-converters>-->
+    </mvc:annotation-driven>
+
+    <mvc:resources mapping="/js/**" location="/js/"></mvc:resources>
+    <mvc:resources mapping="/css/**" location="/css/"></mvc:resources>
+    <mvc:resources mapping="/html/**" location="/html/"></mvc:resources>
+
+    <!-- 文件上传解析器id:框架内部使用，不能丢 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="10240000"/>
+        <property name="maxInMemorySize" value="2048"/>
+        <property name="defaultEncoding" value="utf-8"/>
+    </bean>
+
+    <mvc:interceptors>
+        <bean class="com.nineteen.lostfound.utils.MyDispacher">
+            <property name="blackList">
+                <list>
+                    <value>pay.html</value>
+                    <value>index.html</value>
+                    <value>shopcart.html</value>
+                </list>
+            </property>
+        </bean>
+    </mvc:interceptors>
+
+</beans>

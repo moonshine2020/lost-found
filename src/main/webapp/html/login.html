@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../js/angular.js"></script>
+    <script type="text/javascript" src="../js/util.js"></script>
+    <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div ng-controller="testController">
+    <div>
+        <input type="text" ng-model="userid" class=""/>
+    </div>
+  <div>
+      <input type="text" ng-model="password"  class="">
+  </div>
+
+    <button class="" ng-click="click()" >登录</button>
+</div>
+<script>
+    var app=angular.module('myapp',[]);
+    app.controller('testController',function ($scope,$http) {
+        $scope.click=function() {
+            var userid=$scope.userid;
+            var password=$scope.password;
+            var datajson={userid:userid,password:password};
+            $http.post(getContextPath()+'user/test',
+                datajson
+            )
+        };
+    });
+
+
+</script>
+</body>
+</html>

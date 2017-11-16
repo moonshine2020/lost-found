@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD com.lostandfound.Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nineteen.lostfound.mapper.UserMapper">
+  <select id="selectUser" parameterType="com.nineteen.lostfound.entity.User" resultType="int">
+      select count(*) from user where userid=#{userid} and password=#{password}
+  </select>
+</mapper>
